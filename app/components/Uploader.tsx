@@ -1,9 +1,7 @@
 "use client";
 
 import React from "react";
-import { useAppStore } from "../store";
-
-type SlotKey = "front" | "back" | "left" | "right";
+import { useAppStore, type SlotKey } from "../../store/useAppStore";
 
 const labels: Record<SlotKey, string> = {
   front: "മുൻ ഭാഗം (Front)",

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useMemo, useCallback } from 'react';
+import React, { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
@@ -40,7 +40,6 @@ const hairFragmentShader = `
 
 function LivingHairField() {
   const instancedMeshRef = useRef<THREE.InstancedMesh>(null);
-  const materialRef = useRef<THREE.ShaderMaterial>(null);
   const dummy = useMemo(() => new THREE.Object3D(), []);
   
   // Hair strand geometry
@@ -100,17 +99,13 @@ function LivingHairField() {
   
   // Animation loop
   useFrame((state) => {
-    if (materialRef.current) {
-      materialRef.current.uniforms.u_time.value = state.clock.getElapsedTime();
-    }
+    hairMaterial.uniforms.u_time.value = state.clock.getElapsedTime();
   });
   
   return (
     <instancedMesh
       ref={instancedMeshRef}
-      geometry={hairGeometry}
-      material={hairMaterial}
-      count={hairCount}
+      args={[hairGeometry, hairMaterial, hairCount]}
     />
   );
 }

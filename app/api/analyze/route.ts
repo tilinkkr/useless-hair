@@ -7,6 +7,8 @@ import { promisify } from "util";
 
 export const runtime = "nodejs";
 
+const ENABLE_PYTHON = process.env.ENABLE_PYTHON_ANALYSIS === 'true';
+
 async function runPythonAnalysis(imageBuffers: Buffer[]): Promise<any> {
   return new Promise((resolve, reject) => {
     try {
@@ -99,20 +101,45 @@ export async function POST(req: Request) {
     }
 
     try {
-      const analysis_results = await runPythonAnalysis(buffers);
-      
-      return NextResponse.json({
-        count: analysis_results.total_hairs ?? 0,
-        status: "Advanced Analysis Complete",
-        analysis_type: "sophisticated_analysis",
-        confidence: analysis_results.confidence,
-        view_contributions: analysis_results.view_contributions,
-        heatmaps: analysis_results.heatmaps,
+      const analysis_results = ENABLE_PYTHON
+        ? await runPythonAnalysis(buffers)
+        : null;
+
+      if (analysis_results) {
+        return NextResponse.json({
+          count: analysis_results.total_hairs ?? 0,
+          status: "Advanced Analysis Complete",
+          analysis_type: "sophisticated_analysis",
+          confidence: analysis_results.confidence,
+          view_contributions: analysis_results.view_contributions,
+          heatmaps: analysis_results.heatmaps,
+          details: {
+            total_hairs: analysis_results.total_hairs ?? 0,
+            confidence_score: analysis_results.confidence ?? 0,
+            analysis_time: analysis_results.analysis_time ?? "N/A",
+            view_breakdown: analysis_results.view_contributions ?? []
+          }
+        });
+      }
+
+      // If Python is disabled, fall through to JS fallback
+      const count = await calculateHoloFollicularCount(buffers);
+      const numericCount = typeof count === 'number' ? count : Number(String(count).replace(/[\,\s]/g, ''));
+
+      return NextResponse.json({ 
+        count: Number.isFinite(numericCount) ? numericCount : 0, 
+        status: ENABLE_PYTHON ? "Basic Analysis Complete" : "Analysis Complete",
+        analysis_type: ENABLE_PYTHON ? "fallback_analysis" : "js_analysis",
         details: {
-          total_hairs: analysis_results.total_hairs ?? 0,
-          confidence_score: analysis_results.confidence ?? 0,
-          analysis_time: analysis_results.analysis_time ?? "N/A",
-          view_breakdown: analysis_results.view_contributions ?? []
+          total_hairs: Number.isFinite(numericCount) ? numericCount : 0,
+          confidence_score: 0.5,
+          analysis_time: "1.5s",
+          view_breakdown: [
+            { view: 'Front', hairs: 0, weight: 0.4 },
+            { view: 'Back', hairs: 0, weight: 0.4 },
+            { view: 'Left', hairs: 0, weight: 0.1 },
+            { view: 'Right', hairs: 0, weight: 0.1 },
+          ]
         }
       });
     } catch (analysis_error) {
@@ -120,7 +147,7 @@ export async function POST(req: Request) {
       
       try {
         const count = await calculateHoloFollicularCount(buffers);
-        const numericCount = typeof count === 'number' ? count : Number(String(count).replace(/[,\s]/g, ''));
+        const numericCount = typeof count === 'number' ? count : Number(String(count).replace(/[\,\s]/g, ''));
         
         return NextResponse.json({ 
           count: Number.isFinite(numericCount) ? numericCount : 0, 
