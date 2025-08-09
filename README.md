@@ -101,3 +101,6 @@ Team Contributions
 Tilin Bijoy: Team Lead; managed the overall project architecture, frontend development with Next.js and React, and UI/UX design.
 
 Avin Suresh: Backend and Algorithm Specialist; developed the core Python computer vision algorithm for hair segmentation and density analysis, and implemented the Python-Node.js bridge.
+
+
+vercel link : https://useless-hair-8t8z-q69osgquo-kkrs-projects-dc28afa5.vercel.app?_vercel_share=J52NzvKYVJI6J2uQcuMlUD7jvDkj3zFI
