@@ -1,8 +1,11 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": ".next",
-  "framework": "nextjs",
-  "env": {
-    "ENABLE_PYTHON_ANALYSIS": "false"
+  "functions": {
+    "app/api/analyze/route.ts": {
+      "maxDuration": 45,
+      "memory": 1024
+    },
+    "app/api/gpt-prophecy/route.ts": {
+      "maxDuration": 20
+    }
   }
 }

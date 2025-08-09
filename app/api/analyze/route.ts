@@ -30,8 +30,9 @@ async function runPythonAnalysis(imageBuffers: Buffer[]): Promise<any> {
         ? venvPythonUnix
         : "python";
 
-      // Spawn Python process
-      const pythonProcess = spawn(pythonExec, ["utils/python_bridge.py"], {
+      // Spawn Python process using absolute script path for Vercel
+      const pythonScriptPath = path.join(process.cwd(), 'utils', 'python_bridge.py');
+      const pythonProcess = spawn('python3', [pythonScriptPath], {
         cwd,
         stdio: ["pipe", "pipe", "pipe"],
       });
