@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Mudi Jyolsan (മുടി ജ്യോത്സൻ) 🎯
 
-## Getting Started
+Basic Details
 
-First, run the development server:
+Team Name: Nexheim
 
-```bash
+Team Members
+
+Team Lead: Tilin Bijoy - Viswajyothi College of Engineering and Technology, Vazhakulam
+
+Member 2: Avin Suresh - Viswajyothi College of Engineering and Technology, Vazhakulam
+
+Project Description
+
+Mudi Jyolsan is a next-generation, AI-powered wellness application that provides users with a hyper-personalized analysis of their hair. By uploading four images of their head, users receive a precise, data-driven hair count, a 3D follicular density heatmap, and a unique AI-generated "prophecy" about their future.
+
+The Problem (that doesn't exist)
+
+For centuries, humanity has stared into the mirror, plagued by a single, agonizing question: "Exactly how many strands of hair are on my head, and what does it mean for my destiny?" This critical gap in self-awareness leads to existential dread and suboptimal life choices. Traditional methods are inefficient, and society has lacked a data-driven solution to this follicular crisis.
+
+The Solution (that nobody asked for)
+
+We have engineered the world's first Psychofollicular Analysis Engine. Our platform leverages a proprietary, multi-stage computer vision algorithm to perform a 360° volumetric hair census. The results are cross-referenced with our advanced AI oracle, providing users with not just a number, but a profound, actionable "hair prophecy" to guide their lives.
+
+Technical Details
+
+Technologies/Components Used
+
+For Software:
+Languages: TypeScript, Python
+
+Frameworks: Next.js, React
+
+Libraries:
+
+Frontend: Tailwind CSS, React-Three-Fiber, Drei, Framer Motion
+
+Backend (Python): OpenCV, NumPy, Matplotlib, Seaborn
+
+AI: Google Generative AI (for Gemini API)
+
+Tools: Vercel (for deployment), Git & GitHub, VS Code
+
+For Hardware:
+This is a software-only project. The only hardware required is a standard laptop and a camera to take pictures of your head.
+
+Implementation
+
+For Software:
+
+Installation
+
+
+
+Bash
+
+
+
+# 1. Clone the repository
+
+git clone <your-repo-link># 2. Install frontend dependencies
+
+npm install# 3. Install Python dependencies
+
+pip install -r requirements.txt
+
+Run
+
+
+
+Bash
+
+
+
+# Run the Next.js development server
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Project Documentation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+For Software:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Screenshots
 
-## Learn More
+Caption: The main upload interface, where the user is prompted to provide four images for the "360° Volumetric Scan."
 
-To learn more about Next.js, take a look at the following resources:
+Caption: The results dashboard displaying the hyper-precise "Estimated Hair Count," the scientific classification, and the interactive 3D heatmap visualization.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Caption: The AI-generated "Follicular Prophecy," revealed after the user consults the cosmos for their hair-based destiny.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Diagrams
 
-## Deploy on Vercel
+Caption: The project architecture. The Next.js frontend calls a Node.js API route, which then uses a Python bridge to execute the OpenCV analysis script. The result, including heatmap URLs, is returned to the frontend for display.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Project Demo
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Video: https://youtu.be/U6ed5QLnWGU : This video demonstrates the full user journey: uploading the four required images, the "analysis" loading screen, the dramatic reveal of the hair count and 3D model, and finally, generating the AI prophecy.
+
+Team Contributions
+
+Tilin Bijoy: Team Lead; managed the overall project architecture, frontend development with Next.js and React, and UI/UX design.
+
+Avin Suresh: Backend and Algorithm Specialist; developed the core Python computer vision algorithm for hair segmentation and density analysis, and implemented the Python-Node.js bridge.
