@@ -4,26 +4,16 @@ import dynamic from "next/dynamic";
 import { useAppStore } from "./store";
 import { AnimatePresence, motion } from "framer-motion";
 import HairCounter from "./components/HairCounter";
-import IntroVideo from "./components/IntroVideo";
 import UploaderWithAction from "./components/UploaderWithAction";
 import { getDivineProphecy, getAnalysisComment, getConfidenceComment } from "./utils/prophecy";
 import { t } from "./utils/i18n";
+import Image from "next/image";
 const ProphecyGenerator = dynamic(() => import("./components/ProphecyGenerator"), { ssr: false });
 
 const HairCanvas = dynamic(() => import("./components/HairCanvas"), { ssr: false });
 
 export default function Home() {
   const { view, setView, setProphecy, reset, prophecy, analysis } = useAppStore();
-
-  const fetchProphecy = async () => {
-    try {
-      const res = await fetch("/api/prophecy", { method: "POST" });
-      const data = await res.json();
-      setProphecy(data);
-    } catch (error) {
-      console.error("Failed to fetch prophecy:", error);
-    }
-  };
 
   const formatCount = (value: unknown) => {
     if (typeof value === 'number') return value.toLocaleString();
@@ -180,14 +170,14 @@ export default function Home() {
                           <p className="text-ashram-text-secondary text-sm malayalam-text">വിശകലന സമയം (Analysis Time)</p>
                           <p className="text-ashram-accent text-2xl font-mono">{analysis.details.analysis_time}</p>
                           <p className="text-ashram-text-secondary text-xs mt-1">
-                            {getAnalysisComment(analysis.details.analysis_time, analysis.details.confidence_score || 0).malayalam}
+                            {getAnalysisComment(analysis.details.analysis_time).malayalam}
                           </p>
                         </div>
                       )}
                       
                       {/* Hair Count */}
                       <div className="text-center">
-                        <p className="text-ashram-text-secondary text-sm malayalam-text">ഗുരുവിന്റെ കണക്ക് (Guru's Count)</p>
+                        <p className="text-ashram-text-secondary text-sm malayalam-text">ഗുരുവിന്റെ കണക്ക് (Guru&apos;s Count)</p>
                         <p className="text-ashram-saffron text-6xl font-bold animate-pulse malayalam-text">
                           {formatCount(analysis.count)}
                         </p>
@@ -267,11 +257,16 @@ export default function Home() {
                     <div className="grid grid-cols-2 gap-4">
                       {analysis.heatmaps.map((heatmap: string, index: number) => (
                         <div key={index} className="text-center">
-                          <img 
-                            src={heatmap} 
-                            alt={`Heatmap ${index + 1}`}
-                            className="w-full h-32 object-cover rounded-lg border border-ashram-accent"
-                          />
+                          <div className="relative w-full h-32">
+                            <Image 
+                              src={heatmap} 
+                              alt={`Heatmap ${index + 1}`}
+                              fill
+                              className="rounded-lg border border-ashram-accent object-cover"
+                              sizes="(max-width: 768px) 50vw, 33vw"
+                              unoptimized
+                            />
+                          </div>
                           <p className="text-sm text-ashram-text-secondary mt-2 malayalam-text">
                             {['Front', 'Back', 'Left', 'Right'][index]} View
                           </p>

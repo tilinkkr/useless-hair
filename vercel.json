@@ -1,0 +1,11 @@
+{
+  "functions": {
+    "app/api/analyze/route.ts": {
+      "maxDuration": 45,
+      "memory": 1024
+    },
+    "app/api/gpt-prophecy/route.ts": {
+      "maxDuration": 20
+    }
+  }
+}

@@ -3,6 +3,7 @@
 import React from "react";
 import { useAppStore } from "../store";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 type SlotKey = "front" | "back" | "left" | "right";
 
@@ -38,11 +39,14 @@ function UploadSlot({ slot, onFileChange }: { slot: SlotKey; onFileChange: (slot
       whileTap={{ scale: 0.98 }}
     >
       {previewUrl ? (
-        <div className="relative w-full h-full">
-          <img
+        <div className="relative w-full h-full rounded-xl overflow-hidden">
+          <Image
             src={previewUrl}
             alt={labels[slot]}
-            className="absolute inset-0 h-full w-full rounded-xl object-cover"
+            fill
+            className="object-cover"
+            sizes="50vw"
+            unoptimized
           />
           <div className="absolute inset-0 bg-ashram-background bg-opacity-20 rounded-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
             <span className="text-ashram-text-primary font-semibold bg-ashram-background bg-opacity-50 px-3 py-1 rounded-full malayalam-text">
@@ -199,7 +203,7 @@ export default function UploaderWithAction() {
         <motion.button
           onClick={onProcess}
           disabled={!allFilled}
-          className={`w-full rounded-full px-8 py-4 text-lg font-semibold transition-all duration-300 transform ${
+          className={`w-full rounded_full px-8 py-4 text-lg font-semibold transition-all duration-300 transform ${
             allFilled 
               ? "bg-ashram-accent hover:bg-opacity-80 text-ashram-background shadow-2xl hover:scale-105" 
               : "bg-ashram-background bg-opacity-50 text-ashram-text-secondary cursor-not-allowed border border-ashram-accent"

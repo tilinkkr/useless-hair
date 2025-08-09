@@ -1,9 +1,8 @@
 "use client";
 
 import React from "react";
-import { useAppStore } from "../store";
-
-type SlotKey = "front" | "back" | "left" | "right";
+import { useAppStore, type SlotKey } from "../../store/useAppStore";
+import Image from "next/image";
 
 const labels: Record<SlotKey, string> = {
   front: "മുൻ ഭാഗം (Front)",
@@ -20,12 +19,16 @@ function UploadSlot({ slot }: { slot: SlotKey }) {
     <label className="group relative flex aspect-square w-full cursor-pointer items-center justify-center rounded-xl border border-white/15 bg-black/40 text-white transition hover:bg-black/50">
       {data.previewUrl ? (
         // preview image
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={data.previewUrl}
-          alt={labels[slot]}
-          className="absolute inset-0 h-full w-full rounded-xl object-cover"
-        />
+        <div className="absolute inset-0 rounded-xl overflow-hidden">
+          <Image
+            src={data.previewUrl}
+            alt={labels[slot]}
+            fill
+            className="object-cover"
+            sizes="100vw"
+            unoptimized
+          />
+        </div>
       ) : (
         <div className="flex flex-col items-center gap-2 text-center">
           <svg width="36" height="36" viewBox="0 0 24 24" fill="none" className="opacity-80">

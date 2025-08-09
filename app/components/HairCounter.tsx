@@ -123,7 +123,6 @@ const HairCounter = () => {
           className="bg-ashram-accent hover:bg-opacity-80 text-ashram-background font-bold p-4 rounded-full disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 shadow-lg"
           whileHover={{ scale: 1.1, rotate: 5 }}
           whileTap={{ scale: 0.9 }}
-          disabled={isCalculating}
         >
           <span className="text-2xl">+</span>
         </motion.button>
@@ -134,7 +133,6 @@ const HairCounter = () => {
           className="bg-ashram-accent hover:bg-opacity-80 text-ashram-background font-bold p-4 rounded-full disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 shadow-lg"
           whileHover={{ scale: 1.1, rotate: -5 }}
           whileTap={{ scale: 0.9 }}
-          disabled={isCalculating}
         >
           <span className="text-2xl">-</span>
         </motion.button>

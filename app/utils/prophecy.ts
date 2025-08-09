@@ -41,7 +41,7 @@ export const getDivineProphecy = (hairCount: number) => {
   };
 };
 
-export const getAnalysisComment = (analysisTime: string, confidence: number) => {
+export const getAnalysisComment = (analysisTime: string) => {
   const time = parseFloat(analysisTime.replace('s', ''));
   
   if (time < 2) {
